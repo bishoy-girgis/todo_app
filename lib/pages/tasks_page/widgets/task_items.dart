@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/pages/edit_page/edit_page.dart';
 import 'package:todo_app/provider/setting_provider.dart';
-import 'package:todo_app/shared_components/theme/color.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 
 class TaskItems extends StatefulWidget {
   @override
