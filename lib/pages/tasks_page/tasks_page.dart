@@ -1,7 +1,7 @@
 import 'package:calendar_timeline/calendar_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:todo_app/pages/tasks_page/widgets/task_items.dart';
-import 'package:todo_app/shared_components/theme/color.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 
 class TasksPage extends StatelessWidget {
   const TasksPage({super.key});

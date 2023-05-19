@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/pages/settings_page/settings_page.dart';
 import 'package:todo_app/pages/tasks_page/tasks_page.dart';
-import 'package:todo_app/shared_components/theme/color.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 import '../pages/tasks_page/widgets/add_task_bottom_sheet.dart';
 
 class HomeScreen extends StatefulWidget {

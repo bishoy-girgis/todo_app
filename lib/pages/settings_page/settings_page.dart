@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo_app/pages/settings_page/widgets/language_widgets.dart';
 import 'package:todo_app/pages/settings_page/widgets/mode_widgets.dart';
 import 'package:todo_app/provider/setting_provider.dart';
-import 'package:todo_app/shared_components/theme/color.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsPage extends StatelessWidget {

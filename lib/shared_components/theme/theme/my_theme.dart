@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:todo_app/shared_components/theme/color.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 
 class MyTheme {
   static ThemeData LightTheme = ThemeData(

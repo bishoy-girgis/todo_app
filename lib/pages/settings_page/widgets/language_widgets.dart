@@ -3,7 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/setting_provider.dart';
-import '../../../shared_components/theme/color.dart';
+import '../../../shared_components/theme/theme/color.dart';
 
 class LanguageWidget extends StatelessWidget {
   const LanguageWidget({super.key});
