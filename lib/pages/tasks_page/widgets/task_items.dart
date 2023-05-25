@@ -64,7 +64,7 @@ class _TaskItemsState extends State<TaskItems> {
                 width: 5,
                 height: 75,
                 decoration: BoxDecoration(
-                    color: settingsProvider.isChanged
+                    color: settingsProvider.isDone
                         ? primaryColor
                         : Colors.green,
                     borderRadius: BorderRadius.circular(12)),
@@ -79,7 +79,7 @@ class _TaskItemsState extends State<TaskItems> {
                     Text(
                       "Play BasketBall",
                       style: theme.textTheme.bodyMedium?.copyWith(
-                          color: settingsProvider.isChanged
+                          color: settingsProvider.isDone
                               ? primaryColor
                               : Colors.green),
                     ),
@@ -107,10 +107,10 @@ class _TaskItemsState extends State<TaskItems> {
               InkWell(
                   onTap: () {
                     setState(() {
-                      settingsProvider.isChanged = false;
+                      settingsProvider.isDone = false;
                     });
                   },
-                  child: settingsProvider.isChanged
+                  child: settingsProvider.isDone
                       ? Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 4),

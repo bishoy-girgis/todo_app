@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SettingProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   String currentLocal = "en";
-  bool isChanged = true;
+  bool isDone = true;
 
   void changeTheme(ThemeMode newMode) {
     if (newMode == currentTheme) return;
