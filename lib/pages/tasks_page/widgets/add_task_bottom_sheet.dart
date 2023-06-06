@@ -117,7 +117,9 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                           title: titleController.text,
                           description: descriptionController.text,
                           dateTime: selectedDate);
-                      MyDatabase.addTask(taskmodel);
+                      MyDatabase.addTask(taskmodel).then((value) {
+                        Navigator.pop(context);
+                      });
                     }
                   },
                   label: Text(

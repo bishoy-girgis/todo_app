@@ -6,11 +6,11 @@ class TaskModel {
   bool isDone;
 
   TaskModel(
-      {this.id ="",
+      {this.id = "",
       required this.title,
       required this.description,
       required this.dateTime,
-       this.isDone=false});
+      this.isDone = false});
 
   TaskModel.fromFireStore(Map<String, dynamic> json)
       : this(
