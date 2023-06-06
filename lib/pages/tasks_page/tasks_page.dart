@@ -30,7 +30,7 @@ class TasksPage extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            itemCount: 5,
+            itemCount: 10,
             itemBuilder: (BuildContext context, int index) {
               return TaskItems();
             },
