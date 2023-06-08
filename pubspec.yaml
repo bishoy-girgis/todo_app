@@ -44,6 +44,7 @@ dependencies:
   firebase_core: ^2.13.0
   cloud_firestore: ^4.7.1
   intl: ^0.17.0
+  motion_toast: ^2.6.8
 
 dev_dependencies:
   flutter_test:

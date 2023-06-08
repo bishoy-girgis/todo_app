@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:motion_toast/motion_toast.dart';
+import 'package:motion_toast/resources/arrays.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/pages/edit_page/edit_page.dart';
 import 'package:todo_app/provider/setting_provider.dart';
+import 'package:todo_app/shared_components/theme/network/my_database.dart';
 import 'package:todo_app/shared_components/theme/theme/color.dart';
 
 class TaskItems extends StatefulWidget {
@@ -32,7 +35,16 @@ class _TaskItemsState extends State<TaskItems> {
             motion: const DrawerMotion(),
             children: [
               SlidableAction(
-                onPressed: (context) {},
+                onPressed: (context) {
+                  MyDatabase.deleteTask(widget._taskModel.id).then((value) {
+                    MotionToast.delete(
+                        title:  Text("Deleted"),
+                        description:  Text("The Task is deleted"),
+                      animationType: AnimationType.fromTop,
+                      position: MotionToastPosition.top,
+                    ).show(context);
+                  });
+                },
                 icon: Icons.delete,
                 label: "Delete",
                 backgroundColor: Colors.red,

@@ -25,4 +25,15 @@ class MyDatabase {
         //.where("datetime", isEqualTo: dateTime.millisecondsSinceEpoch)
         .snapshots();
   }
+
+  static Future<void> deleteTask(String id){
+    var collection =getCollection();
+    return collection.doc(id).delete();
+  }
+
+  static void updateTask(String id,TaskModel taskModel){
+    var collection=getCollection();
+    collection.doc(id).update(taskModel.toFireStore());
+  }
 }
+// Are You sure you Want to Delete this Task ?
