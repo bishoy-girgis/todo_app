@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/pages/edit_page/edit_page.dart';
 import 'package:todo_app/provider/setting_provider.dart';
 import 'package:todo_app/shared_components/theme/theme/color.dart';
 
 class TaskItems extends StatefulWidget {
+  final TaskModel _taskModel;
+
+  TaskItems(this._taskModel);
+
   @override
   State<TaskItems> createState() => _TaskItemsState();
 }
@@ -54,7 +59,7 @@ class _TaskItemsState extends State<TaskItems> {
                       bottomRight: Radius.circular(14))),
             ]),
         child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
+          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
           decoration: BoxDecoration(
               color: theme.primaryColor,
               borderRadius: BorderRadius.circular(14)),
@@ -62,11 +67,10 @@ class _TaskItemsState extends State<TaskItems> {
             children: [
               Container(
                 width: 5,
-                height: 75,
+                height: 80,
                 decoration: BoxDecoration(
-                    color: settingsProvider.isDone
-                        ? primaryColor
-                        : Colors.green,
+                    color:
+                        widget._taskModel.isDone ? Colors.green : primaryColor,
                     borderRadius: BorderRadius.circular(12)),
               ),
               const SizedBox(
@@ -77,14 +81,24 @@ class _TaskItemsState extends State<TaskItems> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Play BasketBall",
+                      widget._taskModel.title,
                       style: theme.textTheme.bodyMedium?.copyWith(
-                          color: settingsProvider.isDone
-                              ? primaryColor
-                              : Colors.green),
+                          color: widget._taskModel.isDone
+                              ? Colors.green
+                              : primaryColor),
                     ),
                     const SizedBox(
-                      height: 5,
+                      height: 4,
+                    ),
+                    Text(
+                      widget._taskModel.description,
+                      style: theme.textTheme.bodySmall?.copyWith(
+                          color: widget._taskModel.isDone
+                              ? Colors.green
+                              : theme.accentColor),
+                    ),
+                    const SizedBox(
+                      height: 8,
                     ),
                     Row(
                       children: [
@@ -107,11 +121,21 @@ class _TaskItemsState extends State<TaskItems> {
               InkWell(
                   onTap: () {
                     setState(() {
-                      settingsProvider.isDone = false;
+                      //settingsProvider.isDone = false;
+                      widget._taskModel.isDone = true;
                     });
                   },
-                  child: settingsProvider.isDone
+                  child: widget._taskModel.isDone
                       ? Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 4),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(14)),
+                          child: Text("Done!",
+                              style: theme.textTheme.bodyMedium
+                                  ?.copyWith(color: Colors.green)),
+                        )
+                      : Container(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 20, vertical: 4),
                           decoration: BoxDecoration(
@@ -122,15 +146,6 @@ class _TaskItemsState extends State<TaskItems> {
                             size: 35,
                             color: Colors.white,
                           ),
-                        )
-                      : Container(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 4),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(14)),
-                          child: Text("Done!",
-                              style: theme.textTheme.bodyMedium
-                                  ?.copyWith(color: Colors.green)),
                         ))
             ],
           ),

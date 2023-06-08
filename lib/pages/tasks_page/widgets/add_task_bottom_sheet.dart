@@ -100,8 +100,8 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                               border: Border.all(color: theme.accentColor)),
                           padding: const EdgeInsets.all(12),
                           child: Text(
-                            selectedDate.toString().substring(0, 10),
-                            //MyDatetimeUtilies.formateDate(selectedDate),
+                            //selectedDate.toString().substring(0, 10),
+                            MyDatetimeUtilies.formateDate(selectedDate),
                             style: theme.textTheme.bodySmall
                                 ?.copyWith(color: theme.accentColor),
                           )),
@@ -139,7 +139,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     );
   }
 
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate = DateUtils.dateOnly(DateTime.now());
 
   void showBottomDatePicker() async {
     DateTime? chosenDate = await showDatePicker(
@@ -149,7 +149,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
         lastDate: DateTime.now().add(const Duration(days: 365)));
     if (chosenDate == null) return;
     setState(() {
-      selectedDate = chosenDate;
+      selectedDate = DateUtils.dateOnly(chosenDate);
     });
   }
 }

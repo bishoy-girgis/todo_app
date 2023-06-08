@@ -19,8 +19,10 @@ class MyDatabase {
     return collectionRef.add(taskModel);
   }
 
-  static Future<QuerySnapshot<TaskModel>> getTask() {
+  static Stream<QuerySnapshot<TaskModel>> getTask() {
     var collection = getCollection();
-    return collection.get();
+    return collection
+        //.where("datetime", isEqualTo: dateTime.millisecondsSinceEpoch)
+        .snapshots();
   }
 }
