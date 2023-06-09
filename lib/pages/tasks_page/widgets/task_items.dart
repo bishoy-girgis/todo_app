@@ -60,7 +60,7 @@ class _TaskItemsState extends State<TaskItems> {
               SlidableAction(
                   onPressed: (context) {
                     setState(() {
-                      Navigator.pushNamed(context, EditPage.routeName);
+                      Navigator.pushNamed(context, EditPage.routeName,arguments: widget._taskModel);
                     });
                   },
                   icon: Icons.edit,
@@ -135,6 +135,7 @@ class _TaskItemsState extends State<TaskItems> {
                     setState(() {
                       //settingsProvider.isDone = false;
                       widget._taskModel.isDone = true;
+                      settingsProvider.editTask(widget._taskModel);
                     });
                   },
                   child: widget._taskModel.isDone

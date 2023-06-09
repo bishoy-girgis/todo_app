@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/models/task_model.dart';
+import 'package:todo_app/shared_components/theme/network/my_database.dart';
 
 class SettingProvider extends ChangeNotifier {
   ThemeMode currentTheme = ThemeMode.light;
   String currentLocal = "en";
-  bool isDone = true;
 
   void changeTheme(ThemeMode newMode) {
     if (newMode == currentTheme) return;
@@ -24,5 +25,11 @@ class SettingProvider extends ChangeNotifier {
     if (newLocal == currentLocal) return;
     currentLocal = newLocal;
     notifyListeners();
+  }
+  void editTask(TaskModel taskModel){
+    MyDatabase.updateTask(taskModel).then((value) {
+      print("Task edited");
+      notifyListeners();
+    });
   }
 }

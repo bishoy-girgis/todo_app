@@ -31,9 +31,9 @@ class MyDatabase {
     return collection.doc(id).delete();
   }
 
-  static void updateTask(String id,TaskModel taskModel){
+  static Future<void> updateTask(TaskModel taskModel){
     var collection=getCollection();
-    collection.doc(id).update(taskModel.toFireStore());
+    return collection.doc(taskModel.id).update(taskModel.toFireStore());
   }
 }
 // Are You sure you Want to Delete this Task ?
