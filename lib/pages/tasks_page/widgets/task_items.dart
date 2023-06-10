@@ -43,6 +43,7 @@ class _TaskItemsState extends State<TaskItems> {
                       animationType: AnimationType.fromTop,
                       position: MotionToastPosition.top,
                     ).show(context);
+
                   });
                 },
                 icon: Icons.delete,
@@ -133,10 +134,17 @@ class _TaskItemsState extends State<TaskItems> {
               InkWell(
                   onTap: () {
                     setState(() {
+                      MotionToast.success(
+                        title: const Text("Done !"),
+                        description:  const Text("Task is Done"),
+                        animationType: AnimationType.fromTop,
+                        position: MotionToastPosition.top,
+                      ).show(context);
                       //settingsProvider.isDone = false;
                       widget._taskModel.isDone = true;
                       settingsProvider.editTask(widget._taskModel);
-                    });
+                    },
+                    );
                   },
                   child: widget._taskModel.isDone
                       ? Container(

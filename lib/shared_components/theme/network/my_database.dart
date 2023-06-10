@@ -16,13 +16,15 @@ class MyDatabase {
     var collectionRef = getCollection();
     var doc = collectionRef.doc();
     taskModel.id = doc.id;
-    return collectionRef.add(taskModel);
+    return doc.set(taskModel);
   }
 
-  static Stream<QuerySnapshot<TaskModel>> getTask() {
+  static Stream<QuerySnapshot<TaskModel>> getTask(DateTime dateTime) {
+    print(dateTime.microsecondsSinceEpoch);
     var collection = getCollection();
+
     return collection
-        //.where("datetime", isEqualTo: dateTime.millisecondsSinceEpoch)
+        .where("datetime", isEqualTo: dateTime.microsecondsSinceEpoch)
         .snapshots();
   }
 

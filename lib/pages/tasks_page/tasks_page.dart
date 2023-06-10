@@ -5,21 +5,31 @@ import 'package:todo_app/pages/tasks_page/widgets/task_items.dart';
 import 'package:todo_app/shared_components/theme/network/my_database.dart';
 import 'package:todo_app/shared_components/theme/theme/color.dart';
 
-class TasksPage extends StatelessWidget {
-  //DateTime selectedDate =DateUtils.dateOnly(DateTime.now());
+class TasksPage extends StatefulWidget {
+  @override
+  State<TasksPage> createState() => _TasksPageState();
+}
+
+class _TasksPageState extends State<TasksPage> {
+  DateTime selectedDate =DateUtils.dateOnly(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CalendarTimeline(
           dayNameColor: primaryColor,
-          initialDate: DateTime.now(),
+          initialDate: selectedDate,
           firstDate: DateTime.now().subtract(const Duration(days: 365)),
           lastDate: DateTime.now().add(const Duration(days: 365)),
-          onDateSelected: (date) => print(date),
-          // {
-          //   selectedDate = DateUtils.dateOnly(date);
-          // },
+          onDateSelected: (date)
+          //=> print(date),
+          {
+            selectedDate = DateUtils.dateOnly(date);
+            setState(() {
+
+            });
+          },
           leftMargin: 20,
           monthColor: primaryColor,
           dayColor: Theme.of(context).accentColor,
@@ -33,7 +43,7 @@ class TasksPage extends StatelessWidget {
           height: 10,
         ),
         StreamBuilder(
-          stream: MyDatabase.getTask(),
+          stream: MyDatabase.getTask(selectedDate),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(
