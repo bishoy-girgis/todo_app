@@ -1,6 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:todo_app/models/task_model.dart';
 import 'package:todo_app/shared_components/theme/network/my_database.dart';
+import 'package:todo_app/shared_components/theme/theme/color.dart';
 import 'package:todo_app/shared_components/theme/utilies/my_datetime_utilies.dart';
 
 class AddTaskBottomSheet extends StatefulWidget {
@@ -11,6 +14,8 @@ class AddTaskBottomSheet extends StatefulWidget {
 }
 
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
+  DateTime taskTime=DateTime.now();
+  
   var formKey = GlobalKey<FormState>();
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
@@ -36,7 +41,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       .bodyMedium
                       ?.copyWith(color: theme.accentColor),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: TextFormField(
@@ -72,14 +77,16 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     //  maxLength: 4,
                     //  minLines: 2,
                     decoration: InputDecoration(
-                        label: Text(
-                      "Task Describtion",
-                      style: TextStyle(color: theme.accentColor),
-                    )),
+                      label: Text(
+                        "Task Describtion",
+                        style: TextStyle(color: theme.accentColor),
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 15),
+                const SizedBox(height: 8),
                 Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
                   width: double.infinity,
                   child: Text(
                     "Select Date :",
@@ -89,23 +96,66 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                   ),
                 ),
                 InkWell(
-                    onTap: () {
-                      showBottomDatePicker();
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3),
-                              border: Border.all(color: theme.accentColor)),
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            //selectedDate.toString().substring(0, 10),
-                            MyDatetimeUtilies.formateDate(selectedDate),
-                            style: theme.textTheme.bodySmall
-                                ?.copyWith(color: theme.accentColor),
-                          )),
-                    )),
+                  onTap: () {
+                    showBottomDatePicker();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(3),
+                          border: Border.all(color: theme.accentColor)),
+                      padding: const EdgeInsets.all(12),
+                      child: Text(
+                        //selectedDate.toString().substring(0, 10),
+                        MyDatetimeUtilies.formateDate(selectedDate),
+                        style: theme.textTheme.bodySmall
+                            ?.copyWith(color: theme.accentColor),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 5),
+                  width: double.infinity,
+                  child: Text(
+                    "Select Time :",
+                    textAlign: TextAlign.start,
+                    style: theme.textTheme.bodyMedium
+                        ?.copyWith(color: theme.accentColor),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 60.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(80),
+                        border: Border.all(color: theme.accentColor,width: 3 )),
+                    padding: const EdgeInsets.all(12),
+                    margin: EdgeInsets.symmetric(vertical: 10),
+                    child: TimePickerSpinner(
+                      is24HourMode: false,
+                      normalTextStyle: TextStyle(
+                          fontSize: 24,
+                          color: Theme.of(context).accentColor
+                      ),
+                      highlightedTextStyle: TextStyle(
+                          fontSize: 24,
+                          color: primaryColor
+                      ),
+                      spacing: 50,
+                      itemHeight: 80,
+                      isForce2Digits: true,
+                      time: taskTime,
+                      onTimeChange: (time) {
+                        setState(() {
+                          taskTime = time;
+                        });
+                      },
+                    ),
+                  ),
+                ),
                 ElevatedButton.icon(
                   icon: Icon(
                     Icons.check_circle_outline,
@@ -116,6 +166,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                       TaskModel taskmodel = TaskModel(
                           title: titleController.text,
                           description: descriptionController.text,
+                          taskTime: taskTime,
                           dateTime: selectedDate);
                       MyDatabase.addTask(taskmodel).then((value) {
                         Navigator.pop(context);
@@ -152,4 +203,5 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
       selectedDate = DateUtils.dateOnly(chosenDate);
     });
   }
+
 }

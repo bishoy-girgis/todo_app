@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.7.1
   intl: ^0.17.0
   motion_toast: ^2.6.8
+  flutter_time_picker_spinner: ^2.0.0
 
 dev_dependencies:
   flutter_test:

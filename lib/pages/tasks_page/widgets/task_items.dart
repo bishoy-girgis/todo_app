@@ -8,6 +8,7 @@ import 'package:todo_app/pages/edit_page/edit_page.dart';
 import 'package:todo_app/provider/setting_provider.dart';
 import 'package:todo_app/shared_components/theme/network/my_database.dart';
 import 'package:todo_app/shared_components/theme/theme/color.dart';
+import 'package:todo_app/shared_components/theme/utilies/my_datetime_utilies.dart';
 
 class TaskItems extends StatefulWidget {
   final TaskModel _taskModel;
@@ -28,7 +29,9 @@ class _TaskItemsState extends State<TaskItems> {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
       decoration: BoxDecoration(
-          color: Colors.amber, borderRadius: BorderRadius.circular(16)),
+        //color: Colors.amber,
+        borderRadius: BorderRadius.circular(16),
+      ),
       child: Slidable(
         startActionPane: ActionPane(
             extentRatio: 0.25,
@@ -38,20 +41,19 @@ class _TaskItemsState extends State<TaskItems> {
                 onPressed: (context) {
                   MyDatabase.deleteTask(widget._taskModel.id).then((value) {
                     MotionToast.delete(
-                        title:  Text("Deleted"),
-                        description:  Text("The Task is deleted"),
+                      title: Text("Deleted"),
+                      description: Text("The Task is deleted"),
                       animationType: AnimationType.fromTop,
                       position: MotionToastPosition.top,
                     ).show(context);
-
                   });
                 },
                 icon: Icons.delete,
                 label: "Delete",
-                backgroundColor: Colors.red,
+                backgroundColor: Color(0XFFB33030),
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(14),
-                    bottomLeft: Radius.circular(14)),
+                    topLeft: Radius.circular(15),
+                    bottomLeft: Radius.circular(15)),
               ),
             ]),
         endActionPane: ActionPane(
@@ -61,12 +63,13 @@ class _TaskItemsState extends State<TaskItems> {
               SlidableAction(
                   onPressed: (context) {
                     setState(() {
-                      Navigator.pushNamed(context, EditPage.routeName,arguments: widget._taskModel);
+                      Navigator.pushNamed(context, EditPage.routeName,
+                          arguments: widget._taskModel);
                     });
                   },
                   icon: Icons.edit,
                   label: "Edit",
-                  backgroundColor: Colors.amber,
+                  backgroundColor: Color(0XFF116D6E),
                   borderRadius: const BorderRadius.only(
                       topRight: Radius.circular(14),
                       bottomRight: Radius.circular(14))),
@@ -108,7 +111,7 @@ class _TaskItemsState extends State<TaskItems> {
                       style: theme.textTheme.bodySmall?.copyWith(
                           color: widget._taskModel.isDone
                               ? Colors.green
-                              : theme.accentColor),
+                              : primaryColor),
                     ),
                     const SizedBox(
                       height: 8,
@@ -118,13 +121,16 @@ class _TaskItemsState extends State<TaskItems> {
                         Icon(
                           Icons.watch_later_outlined,
                           color: theme.accentColor,
+                          size: 18,
                         ),
                         const SizedBox(
                           width: 4,
                         ),
                         Text(
-                          "10:30 AM",
-                          style: theme.textTheme.bodySmall,
+                          MyDatetimeUtilies.formateTime(
+                              widget._taskModel.taskTime),
+                          style: theme.textTheme.bodySmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
                       ],
                     )
@@ -133,17 +139,18 @@ class _TaskItemsState extends State<TaskItems> {
               ),
               InkWell(
                   onTap: () {
-                    setState(() {
-                      MotionToast.success(
-                        title: const Text("Done !"),
-                        description:  const Text("Task is Done"),
-                        animationType: AnimationType.fromTop,
-                        position: MotionToastPosition.top,
-                      ).show(context);
-                      //settingsProvider.isDone = false;
-                      widget._taskModel.isDone = true;
-                      settingsProvider.editTask(widget._taskModel);
-                    },
+                    setState(
+                      () {
+                        MotionToast.success(
+                          title: const Text("Done !"),
+                          description: const Text("Task is Done"),
+                          animationType: AnimationType.fromTop,
+                          position: MotionToastPosition.top,
+                        ).show(context);
+                        //settingsProvider.isDone = false;
+                        widget._taskModel.isDone = true;
+                        settingsProvider.editTask(widget._taskModel);
+                      },
                     );
                   },
                   child: widget._taskModel.isDone
