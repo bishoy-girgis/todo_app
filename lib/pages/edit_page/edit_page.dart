@@ -82,6 +82,7 @@ class _EditPageState extends State<EditPage> {
                       const SizedBox(height: 20),
                       TextFormField(
                         controller: titleController,
+                        style: TextStyle(color: theme.accentColor),
                         autovalidateMode: AutovalidateMode.always,
                         validator: (String? value) {
                           if (value == null || value.isEmpty) {
@@ -98,6 +99,7 @@ class _EditPageState extends State<EditPage> {
                       ),
                       const SizedBox(height: 20),
                       TextFormField(
+                        style: theme.textTheme.bodySmall,
                         controller: descriptionController,
                         autovalidateMode: AutovalidateMode.always,
                         validator: (String? value) {

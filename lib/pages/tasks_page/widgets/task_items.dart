@@ -41,8 +41,8 @@ class _TaskItemsState extends State<TaskItems> {
                 onPressed: (context) {
                   MyDatabase.deleteTask(widget._taskModel.id).then((value) {
                     MotionToast.delete(
-                      title: Text("Deleted"),
-                      description: Text("The Task is deleted"),
+                      title:const Text("Deleted"),
+                      description: const Text("The Task is deleted"),
                       animationType: AnimationType.fromTop,
                       position: MotionToastPosition.top,
                     ).show(context);
