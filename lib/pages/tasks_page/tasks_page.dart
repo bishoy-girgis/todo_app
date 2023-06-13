@@ -23,11 +23,10 @@ class _TasksPageState extends State<TasksPage> {
           lastDate: DateTime.now().add(const Duration(days: 365)),
           onDateSelected: (date) {
             selectedDate = DateUtils.dateOnly(date);
-            setState(() {
-            });
+            setState(() {});
           },
-          backgroundColor: primaryColor ,
-          selectedDateColor:primaryColor,
+          backgroundColor: primaryColor,
+          selectedDateColor: primaryColor,
           dateColor: Theme.of(context).primaryColor,
           calendarEventSelectedColor: Theme.of(context).primaryColor,
           appbar: false,
@@ -64,12 +63,9 @@ class _TasksPageState extends State<TasksPage> {
             if (snapshot.hasError) {
               return Center(
                   child: Text(
-                    "something went wrong",
-                    style: Theme
-                        .of(context)
-                        .textTheme
-                        .headlineMedium,
-                  ));
+                "something went wrong",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ));
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
@@ -80,21 +76,23 @@ class _TasksPageState extends State<TasksPage> {
                 snapshot.data?.docs.map((e) => e.data()).toList() ?? [];
             return tasksList.isNotEmpty
                 ? Expanded(
-              child: ListView.builder(
-                itemCount: tasksList.length,
-                itemBuilder: (context, index) =>
-                    TaskItems(tasksList[index]),
-              ),
-            )
-                : Center(
-              child: Text(
-                "No Tasks Found ... ",
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .headlineMedium?.copyWith(color: Theme.of(context).accentColor),
-              ),
-            );
+                    child: ListView.builder(
+                      itemCount: tasksList.length,
+                      itemBuilder: (context, index) =>
+                          TaskItems(tasksList[index]),
+                    ),
+                  )
+                : Container(
+              margin: EdgeInsets.only(top: 220),
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    "You don't have any tasks yet!\n Try to add new tasks and make your days productive ...",
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Theme.of(context).accentColor,fontWeight: FontWeight.bold),
+                  ),
+                );
           },
         ),
       ],
