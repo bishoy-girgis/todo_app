@@ -11,7 +11,7 @@ class TaskModel {
       required this.title,
       required this.description,
       required this.dateTime,
-        required this.taskTime,
+      required this.taskTime,
       this.isDone = false});
 
   TaskModel.fromFireStore(Map<String, dynamic> json)
@@ -31,7 +31,7 @@ class TaskModel {
       "description": description,
       "datetime": dateTime.microsecondsSinceEpoch,
       "isDone": isDone,
-      "tasktime":taskTime.millisecondsSinceEpoch
+      "tasktime": taskTime.millisecondsSinceEpoch
     };
   }
 }

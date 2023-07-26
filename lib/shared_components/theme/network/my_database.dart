@@ -38,4 +38,3 @@ class MyDatabase {
     return collection.doc(taskModel.id).update(taskModel.toFireStore());
   }
 }
-// Are You sure you Want to Delete this Task ?

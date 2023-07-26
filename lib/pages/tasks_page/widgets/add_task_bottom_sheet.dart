@@ -67,7 +67,7 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
                     autovalidateMode: AutovalidateMode.always,
                     validator: (String? value) {
                       if (value == null || value.trim().isEmpty) {
-                        return "you must enter task describtion";
+                        return "you must enter ";
                       } else if (value.length < 10) {
                         return "description cant be less than 10 characters";
                       } else {
